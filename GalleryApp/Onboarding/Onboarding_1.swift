@@ -9,13 +9,22 @@ import SwiftUI
 
 struct Onboarding_1: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        ZStack {
+            Color.black.edgesIgnoringSafeArea(.all)
+            VStack {
+            Spacer()
+                Text("Thank you for joining.").foregroundColor(.white)
+                    .font(.title)
+                    .multilineTextAlignment(.center)
+            Spacer()
+                Button(action:{
+                    
+                }){
+                    Image(systemName: "chevron.right").font(.largeTitle).foregroundColor(.white).padding(24)
+                }
+            Spacer()
+            }
         }
-        .padding()
     }
 }
 
