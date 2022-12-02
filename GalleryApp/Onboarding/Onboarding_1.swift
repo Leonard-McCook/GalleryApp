@@ -8,23 +8,31 @@
 import SwiftUI
 
 struct Onboarding_1: View {
+    @State var isActive:Bool = false
+    
     var body: some View {
-        ZStack {
+        NavigationView{
+        ZStack{
+            
             Color.black.edgesIgnoringSafeArea(.all)
-            VStack {
+            VStack{
             Spacer()
-                Text("Thank you for joining.").foregroundColor(.white)
-                    .font(.title)
-                    .multilineTextAlignment(.center)
+                Text("Thank you for   joining").foregroundColor(.white).font(.title).multilineTextAlignment(.center)
+                
             Spacer()
-                Button(action:{
-                    
-                }){
-                    Image(systemName: "chevron.right").font(.largeTitle).foregroundColor(.white).padding(24)
+                NavigationLink(destination:Onboarding_2(),isActive:$isActive){
+                        Button(action:{
+                            isActive = true
+                        }){
+                            Image(systemName: "chevron.right").font(.largeTitle).foregroundColor(.white).padding(24)
+                        }
                 }
+                
             Spacer()
             }
         }
+        .navigationBarHidden(true)
+    }
     }
 }
 
