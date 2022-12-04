@@ -14,14 +14,17 @@ struct ContentView: View {
     }
     
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-                .navigationBarHidden(true)
+        ScrollView {
+            
         }
-        .padding()
+        HStack {
+            VStack {
+                Text("Lorem ipsum dolor sit amet").foregroundColor(.white).font(.title2)
+                Text("See what's coming in the next update").foregroundColor(.white)
+                Link("Let's connect on LinkedIn >", destination: URL(string:"https://www.linkedin.com/in/leonard-mccook/")!)
+                    .foregroundColor(.blue)
+            }
+        }
     }
 }
 
