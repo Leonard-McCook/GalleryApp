@@ -9,14 +9,25 @@ import SwiftUI
 
 struct ContentView: View {
     
+    let columns = [GridItem(.flexible()), GridItem(.flexible())]
+    
     init() {
         (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first!.overrideUserInterfaceStyle = .dark
     }
     
     var body: some View {
-        ScrollView {
+        GeometryReader {geo in
             
+            ScrollView {
+                LazyVGrid(columns: columns){
+                    ForEach(1...10, id: \.self){ i in
+                        Color.orange.frame(width:geo.size.width/2,
+                                           height:geo.size.width/2)
+                    }
+                }
+            }
         }
+        
         HStack {
             VStack {
                 Text("Lorem ipsum dolor sit amet").foregroundColor(.white).font(.title2)
