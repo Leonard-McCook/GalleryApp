@@ -17,25 +17,27 @@ struct ContentView: View {
     
     var body: some View {
         GeometryReader {geo in
-            
-            ScrollView {
-                LazyVGrid(columns: columns){
+        ScrollView {
+            LazyVGrid(columns: columns){
                     ForEach(1...10, id: \.self){ i in
                         Color.orange.frame(width:geo.size.width/2,
-                                           height:geo.size.width/2)
+                            height:geo.size.height/2)
                     }
                 }
+            
+            HStack {
+                VStack {
+                    Text("Lorem ipsum dolor sit amet").foregroundColor(.white).font(.title2)
+                    Text("See what's coming in the next update").foregroundColor(.white)
+                    Link("Let's connect on LinkedIn >", destination: URL(string:"https://www.linkedin.com/in/leonard-mccook/")!)
+                        .foregroundColor(.blue)
+                  }
+               }
             }
         }
         
-        HStack {
-            VStack {
-                Text("Lorem ipsum dolor sit amet").foregroundColor(.white).font(.title2)
-                Text("See what's coming in the next update").foregroundColor(.white)
-                Link("Let's connect on LinkedIn >", destination: URL(string:"https://www.linkedin.com/in/leonard-mccook/")!)
-                    .foregroundColor(.blue)
-            }
-        }
+        
+        .navigationBarHidden(true)
     }
 }
 
