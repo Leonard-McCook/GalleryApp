@@ -35,9 +35,15 @@ struct ContentView: View {
                }
             }
         }
-        
-        
-        .navigationBarHidden(true)
+        .navigationBarItems(trailing:
+        Button(action:{
+         print("triggered")
+        },
+        label:{
+            Image(systemName: "chevron.down").font(.title)
+        }))
+       //.navigationBarHidden(true)
+       
     }
 }
 
