@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
+    @State var openMenu:Bool = false
     
     init() {
         (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first!.overrideUserInterfaceStyle = .dark
@@ -35,15 +36,36 @@ struct ContentView: View {
                }
             }
         }
+        .navigationBarBackButtonHidden(true)
         .navigationBarItems(trailing:
         Button(action:{
+            openMenu = true
          print("triggered")
         },
         label:{
             Image(systemName: "chevron.down").font(.title)
         }))
-       //.navigationBarHidden(true)
-       
+        .navigationBarTitleDisplayMode(.inline)
+        .sheet(isPresented: $openMenu, content: {
+            ZStack {
+                VStack {
+                    Button("About", action:{
+                        openMenu.toggle()
+                    }).font(.title)
+                    Button("App Icon", action:{
+                        openMenu.toggle()
+                    }).font(.title)
+                    Button("License Agreement", action:{
+                        openMenu.toggle()
+                    }).font(.title)
+                    Button("Privacy", action:{
+                        openMenu.toggle()
+                    }).font(.title)
+                    Spacer()
+                    Text("App Version 1.0").font(.subheadline).padding()
+                }
+            }
+        })
     }
 }
 
