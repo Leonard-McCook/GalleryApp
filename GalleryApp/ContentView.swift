@@ -37,7 +37,7 @@ struct ContentView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
-        .navigationBarItems(trailing:
+        /* .navigationBarItems(trailing:
         Button(action:{
             openMenu = true
          print("triggered")
@@ -45,7 +45,16 @@ struct ContentView: View {
         label:{
             Image(systemName: "chevron.down").font(.title)
         }))
+        */
         .navigationBarTitleDisplayMode(.inline)
+        .overlay(alignment: .topTrailing, content: {
+            Button(action:{
+                openMenu.toggle()
+            }, label: {
+                Image(systemName: "chevron.down").font(.largeTitle)
+            })
+        })
+//        .fullScreenCover(isPresented: $openMenu, content: {
         .sheet(isPresented: $openMenu, content: {
             ZStack {
                 Color.white.opacity(0).edgesIgnoringSafeArea(.all)
@@ -72,7 +81,7 @@ struct ContentView: View {
 
 struct BackgroundBlurView:UIViewRepresentable{
     func makeUIView(context: Context) -> some UIView {
-        let view = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
+        let view = UIVisualEffectView(effect: UIBlurEffect(style: .systemThinMaterialDark))
         
         DispatchQueue.main.async {
             view.superview?.superview?.backgroundColor = .clear
