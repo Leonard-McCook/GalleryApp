@@ -48,6 +48,7 @@ struct ContentView: View {
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $openMenu, content: {
             ZStack {
+                Color.white.opacity(0).edgesIgnoringSafeArea(.all)
                 VStack {
                     Button("About", action:{
                         openMenu.toggle()
@@ -64,10 +65,27 @@ struct ContentView: View {
                     Spacer()
                     Text("App Version 1.0").font(.subheadline).padding()
                 }
-            }
+            }.background(BackgroundBlurView())
         })
     }
 }
+
+struct BackgroundBlurView:UIViewRepresentable{
+    func makeUIView(context: Context) -> some UIView {
+        let view = UIVisualEffectView(effect: UIBlurEffect(style: .extraLight))
+        
+        DispatchQueue.main.async {
+            view.superview?.superview?.backgroundColor = .clear
+        }
+        
+        return view
+    }
+    
+    func updateUIView(_ uiView: UIViewType, context: Context) {
+        
+    }
+}
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
