@@ -58,7 +58,8 @@ struct ContentView: View {
         .sheet(isPresented: $openMenu, content: {
             ZStack {
                 Color.white.opacity(0).edgesIgnoringSafeArea(.all)
-                VStack {
+                VStack(spacing:30) {
+                    Text("").padding(30)
                     Button("About", action:{
                         openMenu.toggle()
                     }).font(.title)
