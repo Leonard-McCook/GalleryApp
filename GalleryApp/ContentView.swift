@@ -11,6 +11,7 @@ struct ContentView: View {
     
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
     @State var openMenu:Bool = false
+    @State var aboutLink:Bool = false
     
     init() {
         (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first!.overrideUserInterfaceStyle = .dark
@@ -34,6 +35,11 @@ struct ContentView: View {
                         .foregroundColor(.blue)
                   }
                }
+            /*
+             NavigationLink(destination: AboutPage(), isActive: $aboutLink) {
+                EmptyView()
+            } */
+            
             }
         }
         .navigationBarBackButtonHidden(true)
@@ -56,27 +62,48 @@ struct ContentView: View {
         })
 //        .fullScreenCover(isPresented: $openMenu, content: {
         .sheet(isPresented: $openMenu, content: {
-            ZStack {
-                Color.white.opacity(0).edgesIgnoringSafeArea(.all)
-                VStack(spacing:30) {
-                    Text("").padding(30)
-                    Button("About", action:{
-                        openMenu.toggle()
-                    }).font(.title)
-                    Button("App Icon", action:{
-                        openMenu.toggle()
-                    }).font(.title)
-                    Button("License Agreement", action:{
-                        openMenu.toggle()
-                    }).font(.title)
-                    Button("Privacy", action:{
-                        openMenu.toggle()
-                    }).font(.title)
-                    Spacer()
-                    Text("App Version 1.0").font(.subheadline).padding()
+            NavigationView {
+                ZStack {
+                    Color.white.opacity(0).edgesIgnoringSafeArea(.all)
+                    VStack(spacing:30) {
+                        Text("").padding(30)
+                        NavigationLink(destination: AboutPage(), isActive: $aboutLink) {
+                            Button("About", action:{
+                                aboutLink.toggle()
+                                //  openMenu.toggle()
+                            }).font(.title)
+                        }
+                        Button("App Icon", action:{
+                            openMenu.toggle()
+                        }).font(.title)
+                        Button("License Agreement", action:{
+                            openMenu.toggle()
+                        }).font(.title)
+                        Button("Privacy", action:{
+                            openMenu.toggle()
+                        }).font(.title)
+                        Spacer()
+                        Text("App Version 1.0").font(.subheadline).padding()
+                    }
                 }
-            }.background(BackgroundBlurView())
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationBarHidden(true)
+            }
+            
+            .background(BackgroundBlurView()).edgesIgnoringSafeArea(.all)
         })
+    }
+}
+
+struct AboutPage:View {
+    var body: some View {
+        HStack (alignment: .top) {
+            VStack (alignment: .leading, spacing: 20){
+                Text("About App").font(.largeTitle).foregroundColor(.white).padding()
+                Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam elit justo, pharetra eu ipsum finibus, semper dapibus quam. Donec ut molestie tortor, sed lobortis quam.\n\n Nunc accumsan laoreet justo, et eleifend nisl finibus eget. In rutrum lacus quis felis facilisis consectetur. Aliquam blandit nibh ut porta semper. Praesent at ornare nibh. Quisque quis diam aliquam, porta metus eu, posuere nisi. \n\n In dignissim condimentum purus in dignissim. Aliquam erat volutpat. Donec magna erat, tristique at auctor quis, condimentum in risus. Quisque at.").font(.body).foregroundColor(.gray).multilineTextAlignment(.leading).frame(alignment: .topTrailing).padding()
+                Spacer()
+            }
+        }
     }
 }
 
