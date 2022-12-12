@@ -79,6 +79,9 @@ struct ContentView: View {
                         Button("License Agreement", action:{
                             openMenu.toggle()
                         }).font(.title)
+                        
+                        Link("Privacy Policy", destination: URL(string:"https://www.apple.com/privacy/")!).font(.title)
+                          
                         Button("Privacy", action:{
                             openMenu.toggle()
                         }).font(.title)
