@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import WebKit
 
 struct ContentView: View {
     
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
     @State var openMenu:Bool = false
     @State var aboutLink:Bool = false
+    @State var licenseLink:Bool = false
     
     init() {
         (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first!.overrideUserInterfaceStyle = .dark
@@ -76,9 +78,12 @@ struct ContentView: View {
                         Button("App Icon", action:{
                             openMenu.toggle()
                         }).font(.title)
+                        
+                        NavigationLink(destination: WebView(request: URLRequest(url: URL(string:"https://developer.apple.com/support/terms/")!)), isActive: $licenseLink) {
                         Button("License Agreement", action:{
-                            openMenu.toggle()
+                                licenseLink.toggle()
                         }).font(.title)
+                        }
                         
                         Link("Privacy Policy", destination: URL(string:"https://www.apple.com/privacy/")!).font(.title)
                           
@@ -91,9 +96,12 @@ struct ContentView: View {
                 }
                 .navigationBarTitleDisplayMode(.inline)
                 .navigationBarHidden(true)
+                
+                .background(BackgroundBlurView()).edgesIgnoringSafeArea(.all)
             }
             
             .background(BackgroundBlurView()).edgesIgnoringSafeArea(.all)
+            
         })
     }
 }
@@ -107,6 +115,17 @@ struct AboutPage:View {
                 Spacer()
             }
         }
+    }
+}
+
+struct WebView: UIViewRepresentable {
+    let request:URLRequest
+    func makeUIView(context: Context) -> WKWebView {
+        return WKWebView()
+    }
+    
+    func updateUIView(_ uiView: WKWebView, context: Context) {
+        uiView.load(request)
     }
 }
 
